@@ -5,39 +5,35 @@ set -e  # Прерывать выполнение при ошибках
 while [[ $# -gt 0 ]]; do
     case $1 in
         -e|--user)
-            ENV="$2"
-            ;;
-        -b|--branch)
-            BRANCH="$2"
-            ;;
-        -f|--force)
-            FORCE=true
+            USERNAME="$2"
             ;;
         *)
     esac
 done
 
 
-# Использование параметров
-echo "Environment: $ENV"
-echo "Branch: $BRANCH"
-echo "Force mode: $FORCE"
+# Проверка параметров на наличие/пустоту
+if [[ -z "${USERNAME// }" ]]; then
+    echo "❌ Ошибка: (--user) не может состоять только из пробелов"
+    exit 1
+fi
 
 # Проверка прав root
 if [ "$EUID" -ne 0 ]; then 
-  echo "Please run as root"
+  echo "Пожалуйста, запускайте скрипт из-под пользователя root"
   exit 1
 fi
 
-# Обновление системы
-apt update && apt full-upgrade -y
-apt install -y ufw fail2ban unattended-upgrades
+# Использование параметров
+echo "USERNAME: $USERNAME"
+
 
 # Создание пользователя
 if id "$1" >/dev/null 2>&1; then
-    echo "user " $USERNAME " already exists"
+    echo "пользователь " $USERNAME " уже существует"
 else
     adduser --disabled-password --gecos "" $USERNAME
-    usermod -aG sudo $USERNAME
-    echo "user " $USERNAME " created"
+    echo "пользователь " $USERNAME " создан"
 fi
+
+usermod -aG sudo $USERNAME
