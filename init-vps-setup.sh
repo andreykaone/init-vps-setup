@@ -18,11 +18,17 @@ if [[ -z "${USERNAME// }" ]]; then
     exit 1
 fi
 
+  echo "перед проверкой рута"
+
+
 # Проверка прав root
 if [ "$EUID" -ne 0 ]; then 
   echo "Пожалуйста, запускайте скрипт из-под пользователя root"
   exit 1
 fi
+
+echo "после проверки рута"
+
 
 # Использование параметров
 echo "USERNAME: $USERNAME"
