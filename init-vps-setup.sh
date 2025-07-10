@@ -1,13 +1,11 @@
 #!/bin/bash
 set -e  # Прерывать выполнение при ошибках
 
-
 # Проверка прав root
 if [ "$EUID" -ne 0 ]; then 
   echo "Please run as root"
   exit 1
 fi
-
 
 # Обновление системы
 apt update && apt full-upgrade -y
