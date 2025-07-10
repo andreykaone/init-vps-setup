@@ -1,6 +1,28 @@
 #!/bin/bash
 set -e  # Прерывать выполнение при ошибках
 
+# Разбор аргументов
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -e|--user)
+            ENV="$2"
+            ;;
+        -b|--branch)
+            BRANCH="$2"
+            ;;
+        -f|--force)
+            FORCE=true
+            ;;
+        *)
+    esac
+done
+
+
+# Использование параметров
+echo "Environment: $ENV"
+echo "Branch: $BRANCH"
+echo "Force mode: $FORCE"
+
 # Проверка прав root
 if [ "$EUID" -ne 0 ]; then 
   echo "Please run as root"
