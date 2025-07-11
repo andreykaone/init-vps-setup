@@ -1,7 +1,34 @@
 #!/bin/bash
 set -e  # Прерывать выполнение при ошибках
 
-echo -n "New username: "
-read -r USERNAME
+echo "баксики"
+echo "1 " $1
+echo "2 " $2
+echo "3 " $3
+echo "4 " $4
 
-echo "creating user: " $USERNAME
+echo "перед проверкой рута"
+
+
+# Проверка прав root
+if [ "$EUID" -ne 0 ]; then 
+  echo "Пожалуйста, запускайте скрипт из-под пользователя root"
+  exit 1
+fi
+
+echo "после проверки рута"
+
+
+# Использование параметров
+echo "USERNAME: $USERNAME"
+
+
+# Создание пользователя
+if id "$1" >/dev/null 2>&1; then
+    echo "пользователь " $USERNAME " уже существует"
+else
+    adduser --disabled-password --gecos "" $USERNAME
+    echo "пользователь " $USERNAME " создан"
+fi
+
+usermod -aG sudo $USERNAME
