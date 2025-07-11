@@ -2,6 +2,6 @@
 set -e  # Прерывать выполнение при ошибках
 
 echo -n "New username: "
-read -r $USERNAME
+read -r USERNAME
 
-echo "creating user: $USERNAME"
+echo "creating user: " $USERNAME
