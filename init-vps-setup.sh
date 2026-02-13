@@ -43,7 +43,7 @@ read -p "Размер Swap в ГБ (например, 2): " SWAP_SIZE_GB
 # 2. Обновление системы и установка базового ПО
 echo -e "\n${YELLOW}--- 2. Обновление системы и установка ПО ---${NC}"
 apt update && apt upgrade -y
-apt install -y curl git ufw fail2ban unattended-upgrades sudo tzdata
+apt install -y curl git ufw fail2ban unattended-upgrades sudo tzdata htop
 
 # 3. Настройка Hostname
 echo -e "\n${YELLOW}--- 3. Настройка Hostname ---${NC}"
