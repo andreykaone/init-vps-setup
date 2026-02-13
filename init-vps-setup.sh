@@ -115,9 +115,24 @@ fi
 
 # 9. Настройка Fail2Ban
 if confirm "Настроить Fail2Ban (базовая защита от брутфорса)?"; then
+    cat > /etc/fail2ban/jail.local <<EOF
+[DEFAULT]
+# Использовать systemd для чтения логов (решает проблему отсутствия /var/log/auth.log)
+backend = systemd
+# Время бана
+bantime  = 1h
+# Окно поиска попыток
+findtime = 10m
+# Количество попыток до бана
+maxretry = 5
+
+[sshd]
+enabled = true
+port    = $SSH_PORT
+EOF
     systemctl enable fail2ban
-    systemctl start fail2ban
-    echo -e "${GREEN}Fail2Ban запущен${NC}"
+    systemctl restart fail2ban
+    echo -e "${GREEN}Fail2Ban настроен и запущен (используется backend systemd)${NC}"
 fi
 
 # 10. Unattended Upgrades
