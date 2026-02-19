@@ -35,7 +35,7 @@
 2.  Скачайте и запустите скрипт:
 
 ```bash
-wget https://raw.githubusercontent.com/andreykaone/init-vps-setup/main/init-vps-setup.sh && chmod +x init-vps-setup.sh && ./init-vps-setup.sh
+curl -sSL https://raw.githubusercontent.com/andreykaone/init-vps-setup/main/init-vps-setup.sh -o setup.sh && chmod +x setup.sh && sudo ./setup.sh
 ```
 *(Или используйте `curl -O ...`)*
 
