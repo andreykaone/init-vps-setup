@@ -21,7 +21,7 @@
 Зайдите на ваш VPS под root и выполните:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/ВАШ_GITHUB_ЛОГИН/init-vps-setup/main/init-vps-setup.sh -o setup.sh && chmod +x setup.sh && sudo ./setup.sh
+curl -sSL https://raw.githubusercontent.com/andreykaone/init-vps-setup/main/init-vps-setup.sh -o setup.sh && chmod +x setup.sh && sudo ./setup.sh
 ```
 
 ## Важные замечания:
