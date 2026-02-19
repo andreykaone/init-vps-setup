@@ -127,8 +127,10 @@ echo -e "\n${GREEN}=== НАЧАЛО УСТАНОВКИ ===${NC}"
 
 # 1. Обновление системы
 echo -e "\n${YELLOW}>>> 1. Обновление системы...${NC}"
-apt update && apt upgrade -y
-apt install -y curl git sudo tzdata htop
+export DEBIAN_FRONTEND=noninteractive
+apt-get update
+apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+apt-get install -y curl git sudo tzdata htop
 
 # 2. Настройка Hostname
 echo -e "\n${YELLOW}>>> 2. Настройка Hostname ($NEW_HOSTNAME)...${NC}"
